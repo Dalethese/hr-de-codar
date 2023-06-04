@@ -1,3 +1,12 @@
+// localStorage
+const localStorageTasks = JSON.parse(
+    localStorage.getItem('tasks')
+  )
+  
+  const tasks = localStorage
+    .getItem('tasks') !== null ? localStorageTasks : []
+  
+
 // seleção de elementos
 const todoForm = document.querySelector('#todo-form')
 const todoInput = document.querySelector('#todo-input')
@@ -15,33 +24,61 @@ const filterSelect = document.querySelector('#filter-select')
 let oldInputValue;
 
 //funções
-const saveTodo = text => {
+
+const generateID = () => Math.round(Math.random() * 1000)
+
+const addTaskInTheDOM = ({name, situation}) => {
     const todo = document.createElement('div')
-    todo.classList.add('todo')
+      todo.classList.add('todo')
+      situation === 'done' ? todo.classList.add('done') : ''
+  
+      const todoTitle = document.createElement('h3')
+      todoTitle.innerText = name
+      todo.appendChild(todoTitle)
+  
+      const doneBtn = document.createElement('button')
+      doneBtn.classList.add('finish-todo')
+      doneBtn.innerHTML = `<i class="fa-solid fa-check"></i>`
+      todo.appendChild(doneBtn)
+  
+      const editBtn = document.createElement('button')
+      editBtn.classList.add('edit-todo')
+      editBtn.innerHTML = `<i class="fa-solid fa-pen"></i>`
+      todo.appendChild(editBtn)
+  
+      const removeBtn = document.createElement('button')
+      removeBtn.classList.add('remove-todo')
+      removeBtn.innerHTML = `<i class="fa-solid fa-xmark"></i>`
+      todo.appendChild(removeBtn)
+      
+      todoList.appendChild(todo)
+  
+      todoInput.value = ''
+      todoInput.focus()
+}
 
-    const todoTitle = document.createElement('h3')
-    todoTitle.innerText = text
-    todo.appendChild(todoTitle)
+const updateLocalStorage = () => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+}
 
-    const doneBtn = document.createElement('button')
-    doneBtn.classList.add('finish-todo')
-    doneBtn.innerHTML = `<i class="fa-solid fa-check"></i>`
-    todo.appendChild(doneBtn)
+const saveTask = () => {
+    const taskName = todoInput.value.trim()
+  
+    if (!taskName) {
+      return
+    }
+  
+    addToTasksArray(taskName)
+    init()
+    updateLocalStorage()
+}
 
-    const editBtn = document.createElement('button')
-    editBtn.classList.add('edit-todo')
-    editBtn.innerHTML = `<i class="fa-solid fa-pen"></i>`
-    todo.appendChild(editBtn)
-
-    const removeBtn = document.createElement('button')
-    removeBtn.classList.add('remove-todo')
-    removeBtn.innerHTML = `<i class="fa-solid fa-xmark"></i>`
-    todo.appendChild(removeBtn)
-    
-    todoList.appendChild(todo)
-
-    todoInput.value = ''
-    todoInput.focus()
+const addToTasksArray = name => {
+    tasks.push({
+      id: generateID(),
+      name,
+      situation: 'todo'
+    })
 }
 
 const toggleForms = () => {
@@ -111,17 +148,18 @@ const filter = () => {
     }
 }
 
+const init = () => {
+    todoList.innerHTML = ''
+    tasks.forEach(addTaskInTheDOM)
+}
 
+init()
 
 //eventos
 todoForm.addEventListener('submit',  e => {
     e.preventDefault()
 
-    const inputValue = todoInput.value 
-
-    if(inputValue) {
-        saveTodo(inputValue)
-    }
+    saveTask()
 })
 
 document.addEventListener('click', e => {
@@ -136,6 +174,23 @@ document.addEventListener('click', e => {
 
     if(targetEl.classList.contains('finish-todo')) {
         parentEl.classList.toggle('done')
+        
+        const currentTask = tasks.find(task => task.name === todoTitle)
+        const index = tasks.indexOf(currentTask)
+        
+        if (index !== -1) {
+            tasks.splice(index, 1)
+        }
+
+        console.log(tasks)
+
+        tasks.push({
+            id: generateID(),
+            name: currentTask.name,
+            situation: 'done'
+          })
+
+        updateLocalStorage()
     }
 
     if(targetEl.classList.contains('remove-todo')) {

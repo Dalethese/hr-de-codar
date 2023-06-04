@@ -9,7 +9,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- JS do projeto -->
-    <script src="./js/scripts.js" defer></script>
+    <script src="./js/scripts.js" type="module" defer></script>
     <title>To do avançado</title>
 </head>
 <body>
@@ -56,32 +56,7 @@
                 </select>
             </div>
         </div>
-        <div id="todo-list">
-            <div class="todo done">
-                <h3>Fazendo alguma coisa..</h3>
-                <button class="finish-todo">
-                    <i class="fa-solid fa-check"></i>
-                </button>
-                <button class="edit-todo">
-                    <i class="fa-solid fa-pen"></i>
-                </button>
-                <button class="remove-todo">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="todo">
-                <h3>Estudar Javascript</h3>
-                <button class="finish-todo">
-                    <i class="fa-solid fa-check"></i>
-                </button>
-                <button class="edit-todo">
-                    <i class="fa-solid fa-pen"></i>
-                </button>
-                <button class="remove-todo">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-        </div>
+        <div id="todo-list"></div>
     </div>
 </body>
 </html>

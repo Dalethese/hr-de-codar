@@ -12,6 +12,9 @@ function Navbar () {;
       <li>
         <Link to='/contato'>Contato</Link>
       </li>
+      <li>
+        <Link to='/sax'>Saxofone</Link>
+      </li>
     </ul>
   )
 }

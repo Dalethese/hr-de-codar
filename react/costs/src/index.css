@@ -1,0 +1,18 @@
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+--webkit-font-smoothing: antialiased;
+--moz-osx-font-smoothing: grayscale;
+}
+
+html, body, #root {
+  background-color: #efefef;
+  height: 100vh;
+  font-family: 'Open sans', sans-serif;
+}
+body {
+  /* height: 100vh; */
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+}

@@ -32,6 +32,24 @@
       "cost": 0,
       "services": [],
       "id": 3
+    },
+    {
+      "name": "Projetinho",
+      "budget": "100",
+      "category": {
+        "id": "3",
+        "name": "Design"
+      },
+      "cost": 50,
+      "services": [
+        {
+          "name": "logo",
+          "cost": "50",
+          "description": "criação do logo",
+          "id": "ced6b1ee-538a-4923-8b5d-49c46e49d488"
+        }
+      ],
+      "id": 4
     }
   ],
   "categories": [

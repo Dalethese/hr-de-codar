@@ -1,11 +1,11 @@
 import { useLocation } from "react-router-dom"
 import Message from "../layout/Message"
-import styles from './Projects.module.css'
 import Container from "../layout/Container"
 import LinkButton from "../layout/LinkButton"
 import { useEffect, useState } from "react"
 import ProjectCard from "../project/ProjectCard"
 import Loading from "../layout/Loading"
+import styles from './Projects.module.css'
 
 
 function Projects () {
@@ -15,7 +15,6 @@ function Projects () {
   const [projectsMessage, setProjectsMessage] = useState('')
   
   const location = useLocation()
-  console.log(location)
   let message = ''
 
   if (location.state) {
@@ -31,7 +30,6 @@ function Projects () {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data)
         setProjects(data)
         setRemoveLoading(true)
       })

@@ -8,6 +8,7 @@ import { Thanks } from "../Thanks";
 
 // hooks
 import { useForm } from "../../hooks/useForm";
+import { Steps } from "./Steps";
 
 export function FormContainer() {
   const formComponents = [
@@ -21,7 +22,7 @@ export function FormContainer() {
 
   return (
     <Container>
-      <p>etapas</p>
+      <Steps currentStep={currentStep} />
       <form onSubmit={(e) => changeStep(currentStep + 1, e)}>
         <S.InputsContainer>{currentComponent}</S.InputsContainer>
 

@@ -17,6 +17,10 @@ export const ScoreContainer = styled(FormControl)`
     }
   }
 
+  input {
+    pointer-events: none;
+  }
+
   input:checked ~ svg {
     fill: #7076f4;
   }

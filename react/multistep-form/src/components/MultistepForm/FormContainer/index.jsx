@@ -9,12 +9,36 @@ import { Thanks } from "../Thanks";
 // hooks
 import { useForm } from "../../hooks/useForm";
 import { Steps } from "./Steps";
+import { useState } from "react";
+
+const formTemplate = {
+  name: "",
+  email: "",
+  review: "",
+  comment: "",
+};
 
 export function FormContainer() {
+  const [data, setData] = useState(formTemplate);
+
+  const updateFieldHandler = (key, value) => {
+    setData((prev) => {
+      return { ...prev, [key]: value };
+    });
+  };
+
   const formComponents = [
-    <UserForm key={UserForm} />,
-    <ReviewForm key={ReviewForm} />,
-    <Thanks key={Thanks} />,
+    <UserForm
+      key={UserForm}
+      data={data}
+      updateFieldHandler={updateFieldHandler}
+    />,
+    <ReviewForm
+      key={ReviewForm}
+      data={data}
+      updateFieldHandler={updateFieldHandler}
+    />,
+    <Thanks key={Thanks} data={data} />,
   ];
 
   const { currentStep, currentComponent, changeStep, isLastStep, isFirstStep } =
